@@ -3,10 +3,13 @@ import json , pika, jsonpickle, time
 from datetime import datetime as dt
 from flask_cors import CORS, cross_origin
 
-
+# allowing different host to make call
 app = Flask(__name__)
 cors = CORS(app, resources={r"/foo": {"origins": "*"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
+
+cache_result = {}
+top_persons_count = 500
 
 # error handling https://flask.palletsprojects.com/en/1.1.x/patterns/apierrors/
 class InvalidUsage(Exception):
@@ -54,5 +57,17 @@ def after_request(response):
 @cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def get_top_users(userid):
     result = {}
-    print(result)
-    return jsonify(result[0])
+    global top_persons_count
+    top_persons_count -= 1
+    # check for refreshing top users for every 500 calls  
+    if top_persons_count <= 0 :
+        cache_result = {}
+        top_persons_count = 500
+    if len(cache_result) == 0:
+        cache_result = result
+    print(cache_result)
+    return jsonify(cache_result)
+
+
+# start flask app
+app.run(host="0.0.0.0", port=5000)
