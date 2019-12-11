@@ -26,7 +26,7 @@ class TopUser:
             self.insert([name,group['likes'].mean(),group['retweets'].mean(),group['replies'].mean()])
             i=i+1
             # increase this while deployment to len(data_group)
-            if i==10:
+            if i==10000:
                 break
         end = time.time()
         #print(self.persons_df.head(),end-start)
@@ -37,6 +37,6 @@ class TopUser:
             top_list.append(row['name'])
         return top_list
 
-#tp = TopUser()
+tp = TopUser()
 
-#print(tp.get_top_user_list())
+print(tp.get_top_user_list())
