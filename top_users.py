@@ -26,14 +26,17 @@ class TopUser:
             self.insert([name,group['likes'].mean(),group['retweets'].mean(),group['replies'].mean()])
             i=i+1
             # increase this while deployment to len(data_group)
-            if i==1000:
+            if i==10:
                 break
         end = time.time()
         #print(self.persons_df.head(),end-start)
         self.persons_df = self.persons_df.sort_values(by=['likes_mean', 'retweets_mean','replies_mean'],ascending=False)
-        result = self.persons_df.head(10).to_json(orient='values')
-        return result
+        result = self.persons_df.head(10)
+        top_list = []
+        for index,row in result.iterrows():
+            top_list.append(row['name'])
+        return top_list
 
-tp = TopUser()
+#tp = TopUser()
 
-print(tp.get_top_user_list())
+#print(tp.get_top_user_list())

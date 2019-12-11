@@ -2,6 +2,7 @@ from flask import Flask, request, Response, jsonify
 import json , pika, jsonpickle, time
 from datetime import datetime as dt
 from flask_cors import CORS, cross_origin
+import top_users
 
 # allowing different host to make call
 app = Flask(__name__)
@@ -10,6 +11,9 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 cache_result = {}
 top_persons_count = 500
+
+#import top users class
+tp = top_users.TopUser()
 
 # error handling https://flask.palletsprojects.com/en/1.1.x/patterns/apierrors/
 class InvalidUsage(Exception):
@@ -55,18 +59,22 @@ def after_request(response):
 
 @app.route('/get_top_users',methods=['GET'])
 @cross_origin(origin='*',headers=['Content-Type','Authorization'])
-def get_top_users(userid):
+def get_top_users():
     result = {}
-    global top_persons_count
+    global top_persons_count,cache_result
     top_persons_count -= 1
     # check for refreshing top users for every 500 calls  
     if top_persons_count <= 0 :
         cache_result = {}
         top_persons_count = 500
     if len(cache_result) == 0:
+        result = tp.get_top_user_list()
         cache_result = result
+    response = {
+        "result":cache_result
+    }
     print(cache_result)
-    return jsonify(cache_result)
+    return jsonify(response)
 
 
 # start flask app
