@@ -7,7 +7,7 @@ class TopUser:
         del self.data['html']
         del self.data['url']
         self.data['timestamp'] = pd.to_datetime(self.data['timestamp']).astype(int)
-        self.coinData = pd.read_csv("bitcoin-historical-data/bitstampUSD_1-min_data_2012-01-01_to_2019-08-12.csv")
+        #self.coinData = pd.read_csv("bitcoin-historical-data/bitstampUSD_1-min_data_2012-01-01_to_2019-08-12.csv")
         self.persons_df = pd.DataFrame(columns=['name','likes_mean','retweets_mean','replies_mean'])
         pass
     def insert(self, row):
@@ -37,6 +37,6 @@ class TopUser:
             top_list.append(row['name'])
         return top_list
 
-tp = TopUser()
+#tp = TopUser()
 
-print(tp.get_top_user_list())
+#print(tp.get_top_user_list())

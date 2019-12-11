@@ -1,9 +1,10 @@
 from flask import Flask, request, Response, jsonify
-import json , pika, jsonpickle, time
+import json , time
 from datetime import datetime as dt
 from flask_cors import CORS, cross_origin
 import top_users,pagerank_users
 
+print("we are going to start the server in 2-3 min")
 # allowing different host to make call
 app = Flask(__name__)
 cors = CORS(app, resources={r"/foo": {"origins": "*"}})
@@ -106,4 +107,5 @@ def get_top_users():
 
 
 # start flask app
+print("we are going to start the server in 2-3 min")
 app.run(host="0.0.0.0", port=5000)
