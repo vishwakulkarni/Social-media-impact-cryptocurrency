@@ -10,8 +10,8 @@ from sklearn.preprocessing import MinMaxScaler
 window = 10
 
 """
-This expects df_final.csv to be in the parent directory.
-If a TensorFlow LSTM model is present, it should also be in the parent directory with name
+This expects df_final.csv to be in the data/ directory.
+If a TensorFlow LSTM model is present, it should also be in the data/ with name
 bitcoin_tweet_predictor.h5
 """
 
@@ -54,21 +54,21 @@ def train_test_splitter(inputX, inputy, split=0.8):
 
 def fit_lstm_model(X, y):
     try:
-        model = load_model("../bitcoin_tweet_predictor.h5")
+        model = load_model("data/bitcoin_tweet_predictor.h5")
     except:
         model = Sequential()
         model.add(LSTM(20, activation="relu", input_shape=(window, 5)))
         model.add(Dense(1))
         model.compile(loss="mean_squared_error", optimizer="sgd")
         model.fit(X, y, epochs=100, batch_size=10, verbose=2, validation_split=0.2)
-        model.save("../bitcoin_tweet_predictor.h5")
+        model.save("data/bitcoin_tweet_predictor.h5")
     return model
 
 def predict(model, X):
     return model.predict(X)
 
 def main():
-    dataset = etl("../df_final.csv")
+    dataset = etl("data/df_final.csv")
     X = dataset.drop("close", axis=1).values
     y = dataset["close"].values
     X_normalized, y_normalized = normalize(X, y)
