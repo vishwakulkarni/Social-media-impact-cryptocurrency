@@ -13,11 +13,33 @@ fetch(api)
 		.catch(function(err){console.log(err);})
 	});
 	
+document.addEventListener("DOMContentLoaded",function(event) {
+fetch(api)
+	.then(function(response){ return response.json(); })
+	.then(function(data1) {
+		parseData1(data1);
+		})
+		.catch(function(err){console.log(err);})
+	});	
+	
 function parseData(data) {
 	for(var i in data.bpi) {
 		time.push(new Date(i));
 		bitcoinPrice.push(data.bpi[i]);
-		predictedPrice.push(data.bpi[i]+200);
+		
+	}
+}
+
+function parseData1(data1) {
+	
+	var p=0;
+	
+	for(var i in data1.bpi) {
+		time.push(new Date(i));
+		if(p%2 == 0 )predictedPrice.push(data1.bpi[i]+200);
+		else predictedPrice.push(data1.bpi[i]-200);
+		
+		p++;
 	}
 }
 
