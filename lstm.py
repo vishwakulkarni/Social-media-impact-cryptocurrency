@@ -33,6 +33,9 @@ def normalize(X, y):
     y_normalized = scaler.transform(y)
     return X_normalized, y_normalized
 
+def denormalize(y_normalized, y_max, y_min):
+    return y_normalized * (y_max - y_min) + y_min
+
 def plot_data(X, y):
     fig, ax = plt.subplots(figsize=(16,8))
     ax.scatter(X[:, 0], y)
@@ -73,10 +76,16 @@ def main():
     y = dataset["close"].values
     X_normalized, y_normalized = normalize(X, y)
     tsX_normalized, tsy_normalized = to_time_series(X_normalized, y_normalized)
+    tsX, tsy = to_time_series(X, y)
     tsX_norm_train, tsX_norm_test, tsy_norm_train, tsy_norm_test = train_test_splitter(tsX_normalized, tsy_normalized)
+    _, _, _, tsy_test = train_test_splitter(tsX, tsy)
+    tsy_test_max, tsy_test_min = np.max(tsy_test), np.min(tsy_test)
     model = fit_lstm_model(tsX_norm_train, tsy_norm_train)
-    predictions = predict(model, tsX_norm_test)
-    results = (np.array([predictions, tsy_norm_test]).T)[0]
+    predictions_normalized = predict(model, tsX_norm_test)
+    predictions = denormalize(predictions_normalized, tsy_test_max, tsy_test_min)
+    tsy_test = np.reshape(tsy_test, (tsy_test.shape[0], 1))
+    results = np.array([predictions, tsy_test])
+    results = np.reshape(results, (results.shape[1], 2))
     np.savetxt("data/results.csv", results, delimiter=",")
     return results
 
