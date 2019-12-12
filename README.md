@@ -1,6 +1,8 @@
-# Social-media-impact-cryptocurrency
+# CSCI 5502 - Data Mining <br />
 
-# Project By(CSCI 5502),
+# Social Media Impact On Cryptocurrency <br />
+
+# Project By
 Vishwanath Kulkarni <br />
 Venkat Arigela <br />
 Mahesh Parab <br />
