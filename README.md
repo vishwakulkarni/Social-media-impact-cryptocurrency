@@ -12,14 +12,14 @@ project name:
 
     Data Mining - Social Media Impact On Cryptocurrency
 
-team:
+TEAM
 
      1.Vishwanath Kulkarni
      2.Venkat Arigela
      3.Mahesh Parab
      4.Priyanka Umesh Pandit Tailapur
 
-State of System:
+SYSTEM STATE
 
 We have completed our project with all functionality which we proposed in earlier reports the project submission. Below are the task details completed and not completed.
 
@@ -32,11 +32,11 @@ We have completed our project with all functionality which we proposed in earlie
 
 
 
-Development setup
+Development Setup
 
  1. Install python3
  2. Install Tensorflow
- 3.  Install flask
+ 3. Install flask
  4. Install keras
  5. Execute below command 
  6. `git clone https://github.com/vishwakulkarni/Social-media-impact-cryptocurrency.git`
