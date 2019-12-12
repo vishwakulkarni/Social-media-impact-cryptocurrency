@@ -84,8 +84,7 @@ def main():
     predictions_normalized = predict(model, tsX_norm_test)
     predictions = denormalize(predictions_normalized, tsy_test_max, tsy_test_min)
     tsy_test = np.reshape(tsy_test, (tsy_test.shape[0], 1))
-    results = np.array([predictions, tsy_test])
-    results = np.reshape(results, (results.shape[1], 2))
+    results = (np.array([predictions, tsy_test]).T)[0]
     np.savetxt("data/results.csv", results, delimiter=",")
     return results
 
