@@ -7,4 +7,12 @@ Mahesh Parab <br />
 Priyanka Umesh Pandit Tailapur <br />
 
 # Source Code Details
-The source code contains Frontend Files (Flask and Graph Codes), Backend Files ( Data Preprocessing, Model Building, and Prediction), and Docker Files
+## Frontend Files 
+1. Flask Application <br />
+2. Graph and Chart <br />
+
+## Backend Files
+1. Data Preprocessing <br />
+2. Model Building <br />
+3. Predictions <br />
+4. Docker <br />
