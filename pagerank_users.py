@@ -87,7 +87,17 @@ class PageRank:
         ranked_users = ranked_users[:min(len(ranked_users), 50)]
         return ranked_users
 
-#pr = PageRank()
-#mentions,users = pr.parse_tweets()
-#graph_structure = pr.generate_graph_structure(mentions,users)
-#print('ranked_users',pr.calculate_pagerank(graph_structure))
+
+#user below code for testing pageRank algorithm and extracting graph
+#reference : https://github.com/karenxi/tweet_ranking_system
+
+'''pr = PageRank()
+mentions,users = pr.parse_tweets()
+graph_structure = pr.generate_graph_structure(mentions,users)
+#print(graph_structure)
+Top_users = {}
+for i in graph_structure:
+    if len(graph_structure[i])>5:
+        Top_users[i] = graph_structure[i]
+print(Top_users)
+print('ranked_users',pr.calculate_pagerank(graph_structure))'''
