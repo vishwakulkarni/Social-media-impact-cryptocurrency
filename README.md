@@ -12,14 +12,14 @@ project name:
 
     Data Mining - Social Media Impact On Cryptocurrency
 
-TEAM
+Team
 
      1.Vishwanath Kulkarni
      2.Venkat Arigela
      3.Mahesh Parab
      4.Priyanka Umesh Pandit Tailapur
 
-SYSTEM STATE
+System State
 
 We have completed our project with all functionality which we proposed in earlier reports the project submission. Below are the task details completed and not completed.
 
