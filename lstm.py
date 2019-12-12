@@ -5,6 +5,7 @@ from keras.models import Sequential, load_model
 from keras.layers import Dense, LSTM
 from sklearn.svm import SVR
 from sklearn.preprocessing import MinMaxScaler
+import json
 
 # Hyperparameters
 window = 10
@@ -70,6 +71,11 @@ def fit_lstm_model(X, y):
 def predict(model, X):
     return model.predict(X)
 
+def to_json(array):
+    return {
+        "results": [[el[0], el[1]] for el in array]
+    }
+
 def main():
     dataset = etl("data/df_final.csv")
     X = dataset.drop("close", axis=1).values
@@ -85,8 +91,10 @@ def main():
     predictions = denormalize(predictions_normalized, tsy_test_max, tsy_test_min)
     tsy_test = np.reshape(tsy_test, (tsy_test.shape[0], 1))
     results = (np.array([predictions, tsy_test]).T)[0]
-    np.savetxt("data/results.csv", results, delimiter=",")
-    return results
+    json_results = to_json(results)
+    with open("data/results.json", "w") as f:
+        json.dump(json_results, f)
+    return json_results
 
 
 if __name__ == "__main__":
