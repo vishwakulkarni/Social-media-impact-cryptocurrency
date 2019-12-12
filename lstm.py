@@ -76,8 +76,10 @@ def main():
     tsX_norm_train, tsX_norm_test, tsy_norm_train, tsy_norm_test = train_test_splitter(tsX_normalized, tsy_normalized)
     model = fit_lstm_model(tsX_norm_train, tsy_norm_train)
     predictions = predict(model, tsX_norm_test)
-    return np.array([predictions, tsy_norm_test]).T
+    results = (np.array([predictions, tsy_norm_test]).T)[0]
+    np.savetxt("data/results.csv", results, delimiter=",")
+    return results
 
 
 if __name__ == "__main__":
-    print(main())
+    main()
