@@ -10,8 +10,8 @@ from sklearn.preprocessing import MinMaxScaler
 window = 10
 
 """
-This expects df_final.csv to be in the parent directory.
-If a TensorFlow LSTM model is present, it should also be in the parent directory with name
+This expects df_final.csv to be in the data/ directory.
+If a TensorFlow LSTM model is present, it should also be in the data/ with name
 bitcoin_tweet_predictor.h5
 """
 
