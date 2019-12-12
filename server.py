@@ -4,6 +4,7 @@ from datetime import datetime as dt
 from flask_cors import CORS, cross_origin
 import top_users,pagerank_users
 
+
 print("we are going to start the server in 2-3 min")
 # allowing different host to make call
 app = Flask(__name__)
@@ -104,6 +105,13 @@ def get_top_users():
     }
     print(cache_result)
     return jsonify(response)
+
+@app.route('/get_prediction_result',methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+def get_prediction_result():
+    with open('data/results.json') as json_file:
+        data = json.load(json_file)
+    return jsonify(data)
 
 
 # start flask app
