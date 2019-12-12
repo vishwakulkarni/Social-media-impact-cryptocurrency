@@ -7,7 +7,7 @@ class TopUser:
         del self.data['html']
         del self.data['url']
         self.data['timestamp'] = pd.to_datetime(self.data['timestamp']).astype(int)
-        self.coinData = pd.read_csv("bitcoin-historical-data/bitstampUSD_1-min_data_2012-01-01_to_2019-08-12.csv")
+        #self.coinData = pd.read_csv("bitcoin-historical-data/bitstampUSD_1-min_data_2012-01-01_to_2019-08-12.csv")
         self.persons_df = pd.DataFrame(columns=['name','likes_mean','retweets_mean','replies_mean'])
         pass
     def insert(self, row):
@@ -26,7 +26,7 @@ class TopUser:
             self.insert([name,group['likes'].mean(),group['retweets'].mean(),group['replies'].mean()])
             i=i+1
             # increase this while deployment to len(data_group)
-            if i==10:
+            if i==10000:
                 break
         end = time.time()
         #print(self.persons_df.head(),end-start)

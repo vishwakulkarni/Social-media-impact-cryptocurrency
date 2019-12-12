@@ -1,0 +1,43 @@
+* {
+	box-sizing: border-box;
+ }
+
+body {
+	 margin: 0;
+	 padding: 0;
+	 font-family: "Comic Sans MS","Helvetica Neue", Helvetica, Arial, sans-serif;
+	 background-color: black;
+	 font-color:white;
+	}
+
+.topheading {
+	height:50px;
+	background-color:lightblue;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 50px; 
+        margin-top: 0;
+	font-size:20px;	
+	font-weight:bold
+}
+
+.secondheading {
+	text-align:center;
+	vertical-align:middle;
+	color:lightblue;
+}
+p {
+	margin:0;
+}
+
+.column {
+	  float: left;
+	  width: 30%;
+	  padding: 10px;
+  }
+
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+ }

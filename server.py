@@ -1,9 +1,10 @@
 from flask import Flask, request, Response, jsonify
-import json , pika, jsonpickle, time
+import json , time
 from datetime import datetime as dt
 from flask_cors import CORS, cross_origin
-import top_users
+import top_users,pagerank_users
 
+print("we are going to start the server in 2-3 min")
 # allowing different host to make call
 app = Flask(__name__)
 cors = CORS(app, resources={r"/foo": {"origins": "*"}})
@@ -12,8 +13,14 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 cache_result = {}
 top_persons_count = 500
 
+cache_popular_person = {}
+popular_persons_count = 500
+
 #import top users class
 tp = top_users.TopUser()
+
+#import page ranked users class
+pr = pagerank_users.PageRank()
 
 # error handling https://flask.palletsprojects.com/en/1.1.x/patterns/apierrors/
 class InvalidUsage(Exception):
@@ -57,6 +64,28 @@ def after_request(response):
     print(response_log)
     return response
 
+@app.route('/get_popular_users',methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+def get_popular_users():
+    result = {}
+    global popular_persons_count,cache_popular_person
+    popular_persons_count -= 1
+    # check for refreshing top users for every 500 calls  
+    if popular_persons_count <= 0 :
+        cache_popular_person = {}
+        popular_persons_count = 500
+    if len(cache_popular_person) == 0:
+        mentions,users = pr.parse_tweets()
+        graph_structure = pr.generate_graph_structure(mentions,users)
+        result = pr.calculate_pagerank(graph_structure)
+        cache_popular_person = result
+    response = {
+        "result":cache_popular_person
+    }
+    print(cache_result)
+    return jsonify(response)
+
+
 @app.route('/get_top_users',methods=['GET'])
 @cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def get_top_users():
@@ -78,4 +107,5 @@ def get_top_users():
 
 
 # start flask app
+print("we are going to start the server in 2-3 min")
 app.run(host="0.0.0.0", port=5000)
