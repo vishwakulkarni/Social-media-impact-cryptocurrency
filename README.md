@@ -39,8 +39,8 @@ Development setup
  3.  Install flask
  4. Install keras
  5. Execute below command 
- 6. `git clone https://github.com/vishwakulkarni/profile-aggregator.git`
- 7. `cd profile-aggregator`
+ 6. `git clone https://github.com/vishwakulkarni/Social-media-impact-cryptocurrency.git`
+ 7. `cd Social-media-impact-cryptocurrency`
  8. `python3 server.py`
  9. `python3 flask/app.py`
  10. server will be running on [http://localhost:3000](http://localhost:3000/)
