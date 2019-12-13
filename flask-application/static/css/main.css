@@ -32,7 +32,7 @@ p {
 
 .column {
 	  float: left;
-	  width: 30%;
+	  width: 25%;
 	  padding: 10px;
   }
 
@@ -41,3 +41,24 @@ p {
 	display: table;
 	clear: both;
  }
+
+ table {
+	 color:lightblue;
+	 font-size:15px;
+	 border: 1px solid lightblue;
+}
+
+th {
+	text-align:center;
+	border: 1px solid lightblue;
+	}
+td {
+	text-align:center;
+	border: 1px solid lightblue;
+}
+
+.column1 {
+	float:left;
+	width: 50%;
+	padding:10px;
+}
