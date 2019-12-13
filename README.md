@@ -46,5 +46,3 @@ Development Setup
  10. server will be running on [http://localhost:3000](http://localhost:3000/)
 
 Want to try dashboard without setup used this ur [http://35.184.251.107:5000/](http://35.184.251.107:5000/)
-
- 
