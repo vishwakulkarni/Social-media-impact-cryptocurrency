@@ -5,32 +5,15 @@ app = Flask(__name__)
 def hello():
     import requests
     import json
-    import oauth2 as oauth
-
-    consumer_key = ""
-    consumer_secret = ""
-       
-    access_token = ""
-    access_token_secret = ""
-          
-    consumer = oauth.Consumer(key=consumer_key, secret=consumer_secret)
-    access_token = oauth.Token(key=access_token, secret=access_token_secret)
-             
-    client = oauth.Client(consumer, access_token)
-                
-    url="https://api.twitter.com/1.1/search/tweets.json?q=bitcoin" 
-    response_1, res=client.request(url)
-    tweets=json.loads(res)
-    username = []
-    tweet = []
-    dates = []
-
-    for i in tweets['statuses']:
-        username.append(i['user']['screen_name'])
-        tweet.append(i['text'])
-        dates.append(i['created_at'])
-                            
-    return render_template('bitcoinPredictions.html', finals = zip(username,tweet,dates))
+  
+    url = "http://34.69.131.19:5000/get_top_users"
+    response = requests.get(url)
+    topusers = response.json()['result']
+    
+    url = "http://34.69.131.19:5000/get_popular_users"
+    response = requests.get(url)
+    popularusers = response.json()['result'][:10]
+    return render_template('bitcoinPredictions.html', topusers = topusers,popularusers=popularusers)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0",port=5000,debug=True)
