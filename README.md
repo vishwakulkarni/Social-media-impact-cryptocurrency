@@ -45,4 +45,5 @@ Development Setup
  9. `python3 flask/app.py`
  10. server will be running on [http://localhost:3000](http://localhost:3000/)
 
-Want to try dashboard without setup used this ur [http://35.184.251.107:5000/](http://35.184.251.107:5000/)
+Want to try dashboard without setup used this ur [http://35.184.251.107:5000/](http://35.184.251.107:5000/) 
+[Update - The VM is stopped because of the credits consumption. If TA/Grader needs to check the dashboard, we will get it up]
